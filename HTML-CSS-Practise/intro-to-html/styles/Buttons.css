@@ -1,0 +1,63 @@
+
+      .Subscribe-Button{
+         background-color:rgb(255, 0, 0);
+         color:white;
+         border:none;
+         padding-top:10px;
+         padding-left: 10px;
+         padding-bottom:10px;
+         padding-right:10px;
+         border-radius:2px;
+         cursor:pointer;
+         margin-right:8px;
+         transition:opacity 0.15s;
+         vertical-align:top;
+       }
+       .Subscribe-Button:hover{
+       opacity:0.8;
+       }
+       .subscribe-button:active{
+         opacity:0.4;
+       }
+       .Join-button{
+         background-color:white;
+         border-color:rgb(85, 0, 255);
+         border-style:solid;
+         border-width:1px;
+     color:rgb(85, 0, 255);
+     padding-top:9px;
+         padding-left: 10px;
+         padding-bottom:9px;
+         padding-right:10px;
+         border-radius:2px;
+     border-radius:2px;
+     cursor:pointer;
+     transition:background-color 0.15s,color 0.15s;
+     vertical-align:top;
+       }
+       .join-button:hover{
+         background-color:rgb(85, 0, 255);
+         color:white;
+       }
+       .join-button:active{
+         opacity:0.6;
+       }
+     .x-button{
+       background-color:aqua;
+       color:white;
+       border:none;
+       height:36px;
+       width:70px;
+       border-radius:18px;
+       font-weight:bold;
+     font-size:15px;
+     cursor:pointer;
+     margin-left:10px;
+     transition:box-shadow 0.15s;
+     vertical-align:top;
+     }
+     .x-button:hover{
+       box-shadow:4px 6px 8px rgba(0, 0, 0, 0.723);
+     }
+     
+     
