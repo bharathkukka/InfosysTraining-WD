@@ -75,7 +75,7 @@ The currency converter uses the **ExchangeRate-API** service:
 
 ## Results 
 
-![Calculator and Currency Converter](Calculator-CurrencyConverter/Data/BC.png)
+![Calculator and Currency Converter](https://github.com/bhaarath22/WebDev-AI-Projects/blob/3baefc92cb5715aa79e98a1011eedb6f51bfb85a/Calculator-CurrencyConverter/Data/BC.png)
 
 ![Calculator and Currency Converter](Calculator-CurrencyConverter/Data/SC.png)
 
