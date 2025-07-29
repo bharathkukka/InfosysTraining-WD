@@ -1,7 +1,3 @@
-"""
-Vintage–Styled Financial Toolkit
-Solution 1: **All interactive buttons converted to `ttk.Button`
-             and `ttk.Menubutton` for full macOS compatibility"""
 import tkinter as tk
 from tkinter import ttk, font as tkFont
 import math
@@ -9,9 +5,10 @@ import requests
 
 # ------------ GLOBAL VINTAGE SETTINGS ---------------------------------------
 HANDWRITTEN = "Comic Sans MS"
-CREAM_BG    = "#FAF3E0"
-PAPER_BG    = "#F5E6C4"
-INK_DARK    = "#5B4636"
+CREAM_BG = "#FAF3E0"
+PAPER_BG = "#F5E6C4"
+INK_DARK = "#5B4636"
+
 
 # --------------------------------------------------------------------------- #
 #  PRIMARY WINDOW                                                             #
@@ -25,11 +22,11 @@ class FinancialApp(tk.Tk):
 
         # Fonts
         self.vintage_font = tkFont.Font(family=HANDWRITTEN, size=20, weight="bold")
-        self.small_font   = tkFont.Font(family=HANDWRITTEN, size=14, weight="bold")
+        self.small_font = tkFont.Font(family=HANDWRITTEN, size=14, weight="bold")
 
         # ttk styling (macOS-safe)
         style = ttk.Style(self)
-        style.theme_use("clam")                         # cross-platform neutral theme
+        style.theme_use("clam")  # cross-platform neutral theme
         style.configure(
             "Vintage.TButton",
             font=self.vintage_font,
@@ -73,13 +70,15 @@ class FinancialApp(tk.Tk):
         self.grid_columnconfigure((0, 1), weight=1)
         self.grid_rowconfigure(0, weight=1)
 
-        left  = tk.Frame(self, bg=PAPER_BG, bd=3, relief=tk.GROOVE)
+        left = tk.Frame(self, bg=PAPER_BG, bd=3, relief=tk.GROOVE)
         right = tk.Frame(self, bg=PAPER_BG, bd=3, relief=tk.GROOVE)
         left.grid(row=0, column=0, sticky="nsew", padx=15, pady=15)
         right.grid(row=0, column=1, sticky="nsew", padx=15, pady=15)
 
         CalculatorFrame(left, self).pack(expand=True, fill="both", padx=10, pady=10)
-        CurrencyConverterFrame(right, self).pack(expand=True, fill="both", padx=10, pady=10)
+        CurrencyConverterFrame(right, self).pack(
+            expand=True, fill="both", padx=10, pady=10
+        )
 
 
 # --------------------------------------------------------------------------- #
@@ -88,10 +87,10 @@ class FinancialApp(tk.Tk):
 class CalculatorFrame(tk.Frame):
     def __init__(self, parent, app: FinancialApp):
         super().__init__(parent, bg=PAPER_BG)
-        self.app         = app
-        self.expression  = ""
+        self.app = app
+        self.expression = ""
         self.current_tab = tk.StringVar(value="Simple Interest")
-        self.mode        = tk.StringVar(value="Basic")
+        self.mode = tk.StringVar(value="Basic")
         self._header()
         self.container = tk.Frame(self, bg=PAPER_BG)
         self.container.pack(expand=True, fill="both", padx=10, pady=10)
@@ -112,9 +111,15 @@ class CalculatorFrame(tk.Frame):
         )
         menu_btn.pack(side="left", padx=15)
 
-        menu = tk.Menu(menu_btn, tearoff=0, bg="#8B5A2B", fg="white",
-                       activebackground="#8B5A2B", activeforeground="white",
-                       font=self.app.vintage_font)
+        menu = tk.Menu(
+            menu_btn,
+            tearoff=0,
+            bg="#8B5A2B",
+            fg="white",
+            activebackground="#8B5A2B",
+            activeforeground="white",
+            font=self.app.vintage_font,
+        )
         for m in ("Basic", "Scientific", "Financial"):
             menu.add_command(label=m, command=lambda v=m: self._switch_mode(v))
         menu_btn["menu"] = menu
@@ -192,9 +197,7 @@ class CalculatorFrame(tk.Frame):
             self.expression = ""
         elif char == "=":
             try:
-                exp = (
-                    self.expression.replace("^", "**").replace("π", str(math.pi))
-                )
+                exp = self.expression.replace("^", "**").replace("π", str(math.pi))
                 for old, new in {
                     "sqrt": "math.sqrt",
                     "sin": "math.sin",
@@ -226,7 +229,11 @@ class CalculatorFrame(tk.Frame):
             ttk.Button(
                 tab_bar,
                 text=tab,
-                style=("Vintage.TButton" if tab == self.current_tab.get() else "Vintage.TButton"),
+                style=(
+                    "Vintage.TButton"
+                    if tab == self.current_tab.get()
+                    else "Vintage.TButton"
+                ),
                 command=lambda t=tab: self._switch_tab(t),
             ).pack(side="left", expand=True, fill="x", padx=2)
 
@@ -351,8 +358,22 @@ class CurrencyConverterFrame(tk.Frame):
         self.rates = {}
         self.currencies = sorted(
             [
-                "USD", "EUR", "JPY", "GBP", "AUD", "CAD", "CHF", "CNY",
-                "INR", "BRL", "RUB", "ZAR", "SGD", "NZD", "MXN", "KRW",
+                "USD",
+                "EUR",
+                "JPY",
+                "GBP",
+                "AUD",
+                "CAD",
+                "CHF",
+                "CNY",
+                "INR",
+                "BRL",
+                "RUB",
+                "ZAR",
+                "SGD",
+                "NZD",
+                "MXN",
+                "KRW",
             ]
         )
         self._widgets()
@@ -382,9 +403,15 @@ class CurrencyConverterFrame(tk.Frame):
         )
         self.from_btn.pack(side="left", padx=10)
 
-        from_menu = tk.Menu(self.from_btn, tearoff=0, bg="#8B5A2B", fg="white",
-                            activebackground="#8B5A2B", activeforeground="white",
-                            font=self.app.vintage_font)
+        from_menu = tk.Menu(
+            self.from_btn,
+            tearoff=0,
+            bg="#8B5A2B",
+            fg="white",
+            activebackground="#8B5A2B",
+            activeforeground="white",
+            font=self.app.vintage_font,
+        )
         for cur in self.currencies:
             from_menu.add_command(label=cur, command=lambda c=cur: self._set_from(c))
         self.from_btn["menu"] = from_menu
@@ -402,9 +429,15 @@ class CurrencyConverterFrame(tk.Frame):
         )
         self.to_btn.pack(side="left", padx=10)
 
-        to_menu = tk.Menu(self.to_btn, tearoff=0, bg="#8B5A2B", fg="white",
-                          activebackground="#8B5A2B", activeforeground="white",
-                          font=self.app.vintage_font)
+        to_menu = tk.Menu(
+            self.to_btn,
+            tearoff=0,
+            bg="#8B5A2B",
+            fg="white",
+            activebackground="#8B5A2B",
+            activeforeground="white",
+            font=self.app.vintage_font,
+        )
         for cur in self.currencies:
             to_menu.add_command(label=cur, command=lambda c=cur: self._set_to(c))
         self.to_btn["menu"] = to_menu
@@ -423,14 +456,24 @@ class CurrencyConverterFrame(tk.Frame):
             command=lambda: self._update_rates(show_msg=True),
         ).pack(fill="x", padx=20, pady=(0, 20))
 
-        self.result_lbl  = tk.Label(self, text="", **self.app.label_opts)
+        self.result_lbl = tk.Label(self, text="", **self.app.label_opts)
         self.result_lbl.pack(pady=10)
-        self.update_msg  = tk.Label(self, text="", bg=PAPER_BG,
-                                    fg="#008000", font=self.app.small_font,
-                                    wraplength=300)
+        self.update_msg = tk.Label(
+            self,
+            text="",
+            bg=PAPER_BG,
+            fg="#008000",
+            font=self.app.small_font,
+            wraplength=300,
+        )
         self.update_msg.pack(pady=5)
-        self.status_lbl  = tk.Label(self, text="Fetching rates…", bg=PAPER_BG,
-                                    fg=INK_DARK, font=self.app.small_font)
+        self.status_lbl = tk.Label(
+            self,
+            text="Fetching rates…",
+            bg=PAPER_BG,
+            fg=INK_DARK,
+            font=self.app.small_font,
+        )
         self.status_lbl.pack(side="bottom", fill="x", pady=5)
 
     # ----------------------------------------------------------------------- #
@@ -453,7 +496,9 @@ class CurrencyConverterFrame(tk.Frame):
             self.rates = data.get("rates", {})
             self.status_lbl.config(text=f"Rates updated: {data.get('date', '')}")
             if show_msg:
-                self.update_msg.config(text=f"✓ Updated rates for {base}!", fg="#008000")
+                self.update_msg.config(
+                    text=f"✓ Updated rates for {base}!", fg="#008000"
+                )
                 self.after(5000, lambda: self.update_msg.config(text=""))
         except Exception:
             self.status_lbl.config(text="Error updating rates")
@@ -464,7 +509,7 @@ class CurrencyConverterFrame(tk.Frame):
     def _convert(self):
         try:
             amount = float(self.amount_entry.get())
-            rate   = self.rates.get(self.to_var.get())
+            rate = self.rates.get(self.to_var.get())
             if rate is None:
                 raise ValueError("Rate missing")
             result = amount * rate
@@ -481,3 +526,4 @@ class CurrencyConverterFrame(tk.Frame):
 # --------------------------------------------------------------------------- #
 if __name__ == "__main__":
     FinancialApp().mainloop()
+
