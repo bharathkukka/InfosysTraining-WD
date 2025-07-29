@@ -73,6 +73,55 @@ The currency converter uses the **ExchangeRate-API** service:
 - **Rate limits**: Check API documentation for current limits
 - **Supported currencies**: USD, EUR, JPY, GBP, AUD, CAD, CHF, CNY, INR, BRL, RUB, ZAR, SGD, NZD, MXN, KRW
 
+## Results 
+
+![Calculator and Currency Converter](Calculator-CurrencyConverter/Data/BC.png)
+
+![Calculator and Currency Converter](Calculator-CurrencyConverter/Data/SC.png)
+
+![Calculator and Currency Converter](Calculator-CurrencyConverter/Data/LC.png)  
+---
+### ***Issue**
+
+### 🐛 Issue: Invisible Button Text on macOS
+
+While testing the Project on macOS, I ran into a critical UI issue: all `tkinter` button labels were invisible. The buttons themselves were clickable and functional—but without visible text, the interface became unusable.
+
+![Calculator and Currency Converter](Calculator-CurrencyConverter/Data/Fail.png)
+
+![Calculator and Currency Converter](Calculator-CurrencyConverter/Data/Fail1.png)
+---
+### 🔍 Root Cause
+
+This issue stems from macOS shipping with an outdated version of **Tcl/Tk (v8.5)**, which has known rendering bugs with standard `tkinter` widgets—especially buttons.
+
+---
+
+### ✅ Solution: Switch to `ttk.Button`
+
+The fix was simple but effective: replace `tk.Button` with `ttk.Button`, the themed widget from `tkinter.ttk`, which supports modern OS styling and works correctly with macOS.
+
+#### 🔧 Before (Buggy on macOS):
+
+```python
+import tkinter as tk
+
+my_button = tk.Button(root, text="Click Me")
+```
+
+#### ✔️ After (Works Everywhere):
+
+```python
+from tkinter import ttk
+
+my_button = ttk.Button(root, text="Click Me")
+```
+
+This small change restored button labels on macOS and improved the overall UI consistency across platforms.
+
+---
+
+
 ## 🔧 Technical Details
 
 ### File Structure
