@@ -87,9 +87,9 @@ The currency converter uses the **ExchangeRate-API** service:
 
 While testing the Project on macOS, I ran into a critical UI issue: all `tkinter` button labels were invisible. The buttons themselves were clickable and functional—but without visible text, the interface became unusable.
 
-![Calculator and Currency Converter]([Calculator-CurrencyConverter/Data/Fail.png](https://github.com/bhaarath22/WebDev-AI-Projects/blob/cfee272c1f8cebf3bdab01efeb4053d668ad3237/Calculator-CurrencyConverter/Data/Fail.png))
+![Calculator and Currency Converter](https://github.com/bhaarath22/WebDev-AI-Projects/blob/a76bae69a6ca856e9c30a9a49b23fed8568e9a93/Calculator-CurrencyConverter/Data/Fail.png)
 
-![Calculator and Currency Converter]([Calculator-CurrencyConverter/Data/Fail1.png](https://github.com/bhaarath22/WebDev-AI-Projects/blob/cfee272c1f8cebf3bdab01efeb4053d668ad3237/Calculator-CurrencyConverter/Data/Fail1.png))
+![Calculator and Currency Converter](https://github.com/bhaarath22/WebDev-AI-Projects/blob/cfee272c1f8cebf3bdab01efeb4053d668ad3237/Calculator-CurrencyConverter/Data/Fail1.png)
 ---
 ### 🔍 Root Cause
 
