@@ -2,6 +2,7 @@
 Vintage-Styled Financial Toolkit - Kivy Version
 Converted from tkinter to Kivy for cross-platform compatibility
 """
+
 import math
 import requests
 from kivy.app import App
@@ -16,11 +17,12 @@ from kivy.metrics import dp, sp
 from kivy.core.window import Window
 
 # Global vintage color settings
-CREAM_BG = (0.98, 0.95, 0.88, 1)      # #FAF3E0
-PAPER_BG = (0.96, 0.90, 0.77, 1)      # #F5E6C4  
-INK_DARK = (0.36, 0.27, 0.21, 1)      # #5B4636
-BUTTON_BG = (0.55, 0.35, 0.17, 1)     # #8B5A2B
-INPUT_BG = (1.0, 0.97, 0.86, 1)       # #FFF8DC
+CREAM_BG = (0.98, 0.95, 0.88, 1)  # #FAF3E0
+PAPER_BG = (0.96, 0.90, 0.77, 1)  # #F5E6C4
+INK_DARK = (0.36, 0.27, 0.21, 1)  # #5B4636
+BUTTON_BG = (0.55, 0.35, 0.17, 1)  # #8B5A2B
+INPUT_BG = (1.0, 0.97, 0.86, 1)  # #FFF8DC
+
 
 class FinancialApp(App):
     def build(self):
@@ -30,11 +32,13 @@ class FinancialApp(App):
         Window.clearcolor = CREAM_BG
 
         # Create main layout
-        main_layout = BoxLayout(orientation='horizontal', padding=dp(15), spacing=dp(15))
+        main_layout = BoxLayout(
+            orientation="horizontal", padding=dp(15), spacing=dp(15)
+        )
 
         # Create left and right panels
-        left_panel = BoxLayout(orientation='vertical', size_hint=(0.5, 1))
-        right_panel = BoxLayout(orientation='vertical', size_hint=(0.5, 1))
+        left_panel = BoxLayout(orientation="vertical", size_hint=(0.5, 1))
+        right_panel = BoxLayout(orientation="vertical", size_hint=(0.5, 1))
 
         # Add calculator and currency converter
         self.calculator = CalculatorWidget()
@@ -48,22 +52,25 @@ class FinancialApp(App):
 
         return main_layout
 
+
 class VintageButton(Button):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.background_color = BUTTON_BG
         self.color = (1, 1, 1, 1)  # White text
         self.font_size = sp(16)
-        self.font_name = 'Roboto'  # Fallback font
+        self.font_name = "Roboto"  # Fallback font
         self.bold = True
+
 
 class VintageLabel(Label):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.color = INK_DARK
         self.font_size = sp(16)
-        self.font_name = 'Roboto'
+        self.font_name = "Roboto"
         self.bold = True
+
 
 class VintageTextInput(TextInput):
     def __init__(self, **kwargs):
@@ -71,15 +78,16 @@ class VintageTextInput(TextInput):
         self.background_color = INPUT_BG
         self.foreground_color = INK_DARK
         self.font_size = sp(16)
-        self.font_name = 'Roboto'
+        self.font_name = "Roboto"
         self.multiline = False
         self.size_hint_y = None
         self.height = dp(40)
 
+
 class CalculatorWidget(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.orientation = 'vertical'
+        self.orientation = "vertical"
         self.padding = dp(10)
         self.spacing = dp(10)
 
@@ -95,11 +103,15 @@ class CalculatorWidget(BoxLayout):
         self.clear_widgets()
 
         # Header with mode selector
-        header = BoxLayout(orientation='horizontal', size_hint_y=None, height=dp(50))
-        header.add_widget(VintageLabel(text="Calculator Type:", size_hint_x=None, width=dp(120)))
+        header = BoxLayout(orientation="horizontal", size_hint_y=None, height=dp(50))
+        header.add_widget(
+            VintageLabel(text="Calculator Type:", size_hint_x=None, width=dp(120))
+        )
 
         # Mode selector button (replaces Menubutton)
-        self.mode_btn = VintageButton(text=self.current_mode, size_hint_x=None, width=dp(120))
+        self.mode_btn = VintageButton(
+            text=self.current_mode, size_hint_x=None, width=dp(120)
+        )
         self.mode_btn.bind(on_release=self.show_mode_dropdown)
         header.add_widget(self.mode_btn)
 
@@ -128,11 +140,7 @@ class CalculatorWidget(BoxLayout):
     def build_standard_ui(self):
         # Display
         self.display_input = VintageTextInput(
-            text="", 
-            readonly=True, 
-            size_hint_y=None, 
-            height=dp(50),
-            halign="right"
+            text="", readonly=True, size_hint_y=None, height=dp(50), halign="right"
         )
         self.add_widget(self.display_input)
 
@@ -159,17 +167,13 @@ class CalculatorWidget(BoxLayout):
         button_grid = GridLayout(
             cols=5 if self.current_mode == "Scientific" else 4,
             spacing=dp(5),
-            size_hint_y=None
+            size_hint_y=None,
         )
-        button_grid.bind(minimum_height=button_grid.setter('height'))
+        button_grid.bind(minimum_height=button_grid.setter("height"))
 
         for row in grid:
             for char in row:
-                btn = VintageButton(
-                    text=char,
-                    size_hint_y=None,
-                    height=dp(50)
-                )
+                btn = VintageButton(text=char, size_hint_y=None, height=dp(50))
                 if char in ("Clear", "C") and self.current_mode == "Basic":
                     btn.size_hint_x = 4  # Span across all columns
                 btn.bind(on_release=lambda x, ch=char: self.press_button(ch))
@@ -182,9 +186,7 @@ class CalculatorWidget(BoxLayout):
             self.expression = ""
         elif char == "=":
             try:
-                exp = (
-                    self.expression.replace("^", "**").replace("π", str(math.pi))
-                )
+                exp = self.expression.replace("^", "**").replace("π", str(math.pi))
                 for old, new in {
                     "sqrt": "math.sqrt",
                     "sin": "math.sin",
@@ -208,11 +210,13 @@ class CalculatorWidget(BoxLayout):
 
     def build_financial_ui(self):
         # Tab selector
-        tab_layout = BoxLayout(orientation='horizontal', size_hint_y=None, height=dp(50), spacing=dp(5))
+        tab_layout = BoxLayout(
+            orientation="horizontal", size_hint_y=None, height=dp(50), spacing=dp(5)
+        )
         tabs = ["Simple Interest", "Compound Interest", "Loan Calculator"]
 
         for tab in tabs:
-            btn = VintageButton(text=tab, size_hint_x=1/len(tabs))
+            btn = VintageButton(text=tab, size_hint_x=1 / len(tabs))
             if tab == self.current_tab:
                 btn.background_color = (0.7, 0.4, 0.2, 1)  # Darker for active tab
             btn.bind(on_release=lambda x, t=tab: self.select_tab(t))
@@ -221,7 +225,7 @@ class CalculatorWidget(BoxLayout):
         self.add_widget(tab_layout)
 
         # Content area
-        content = BoxLayout(orientation='vertical', spacing=dp(10))
+        content = BoxLayout(orientation="vertical", spacing=dp(10))
 
         if self.current_tab in ("Simple Interest", "Compound Interest"):
             self.build_interest_ui(content)
@@ -236,19 +240,23 @@ class CalculatorWidget(BoxLayout):
 
     def build_interest_ui(self, container):
         form_layout = GridLayout(cols=2, spacing=dp(10), size_hint_y=None)
-        form_layout.bind(minimum_height=form_layout.setter('height'))
+        form_layout.bind(minimum_height=form_layout.setter("height"))
 
         fields = ["Principal", "Rate % per year", "Time years"]
         self.entries = {}
 
         for field in fields:
-            form_layout.add_widget(VintageLabel(text=f"{field}:", size_hint_y=None, height=dp(40)))
+            form_layout.add_widget(
+                VintageLabel(text=f"{field}:", size_hint_y=None, height=dp(40))
+            )
             entry = VintageTextInput()
             self.entries[field] = entry
             form_layout.add_widget(entry)
 
         if self.current_tab == "Compound Interest":
-            form_layout.add_widget(VintageLabel(text="Compounds/year:", size_hint_y=None, height=dp(40)))
+            form_layout.add_widget(
+                VintageLabel(text="Compounds/year:", size_hint_y=None, height=dp(40))
+            )
             entry = VintageTextInput()
             self.entries["Compounds"] = entry
             form_layout.add_widget(entry)
@@ -256,11 +264,7 @@ class CalculatorWidget(BoxLayout):
         container.add_widget(form_layout)
 
         # Calculate button
-        calc_btn = VintageButton(
-            text="Calculate",
-            size_hint_y=None,
-            height=dp(50)
-        )
+        calc_btn = VintageButton(text="Calculate", size_hint_y=None, height=dp(50))
         calc_btn.bind(on_release=lambda x: self.calculate_interest())
         container.add_widget(calc_btn)
 
@@ -270,7 +274,7 @@ class CalculatorWidget(BoxLayout):
             size_hint_y=None,
             height=dp(80),
             text_size=(None, None),
-            halign="center"
+            halign="center",
         )
         container.add_widget(self.result_label)
 
@@ -282,24 +286,30 @@ class CalculatorWidget(BoxLayout):
 
             if self.current_tab == "Simple Interest":
                 si = P * R * T
-                self.result_label.text = f"Simple Interest: ${si:.2f}\nTotal Amount: ${P+si:.2f}"
+                self.result_label.text = (
+                    f"Simple Interest: ${si:.2f}\nTotal Amount: ${P+si:.2f}"
+                )
             else:
                 n = int(self.entries["Compounds"].text)
                 amount = P * (1 + R / n) ** (n * T)
-                self.result_label.text = f"Compound Interest: ${amount-P:.2f}\nTotal Amount: ${amount:.2f}"
+                self.result_label.text = (
+                    f"Compound Interest: ${amount-P:.2f}\nTotal Amount: ${amount:.2f}"
+                )
         except Exception:
             self.result_label.text = "Error: Enter valid numbers"
             self.result_label.color = (1, 0, 0, 1)  # Red for error
 
     def build_loan_ui(self, container):
         form_layout = GridLayout(cols=2, spacing=dp(10), size_hint_y=None)
-        form_layout.bind(minimum_height=form_layout.setter('height'))
+        form_layout.bind(minimum_height=form_layout.setter("height"))
 
         fields = ["Loan Amount", "Rate % per year", "Term years"]
         self.entries = {}
 
         for field in fields:
-            form_layout.add_widget(VintageLabel(text=f"{field}:", size_hint_y=None, height=dp(40)))
+            form_layout.add_widget(
+                VintageLabel(text=f"{field}:", size_hint_y=None, height=dp(40))
+            )
             entry = VintageTextInput()
             self.entries[field] = entry
             form_layout.add_widget(entry)
@@ -307,20 +317,13 @@ class CalculatorWidget(BoxLayout):
         container.add_widget(form_layout)
 
         # Calculate button
-        calc_btn = VintageButton(
-            text="Calculate EMI",
-            size_hint_y=None,
-            height=dp(50)
-        )
+        calc_btn = VintageButton(text="Calculate EMI", size_hint_y=None, height=dp(50))
         calc_btn.bind(on_release=lambda x: self.calculate_loan())
         container.add_widget(calc_btn)
 
         # Result label
         self.result_label = VintageLabel(
-            text="",
-            size_hint_y=None,
-            height=dp(60),
-            halign="center"
+            text="", size_hint_y=None, height=dp(60), halign="center"
         )
         container.add_widget(self.result_label)
 
@@ -337,19 +340,36 @@ class CalculatorWidget(BoxLayout):
             self.result_label.text = "Error: Enter valid numbers"
             self.result_label.color = (1, 0, 0, 1)
 
+
 class CurrencyConverterWidget(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.orientation = 'vertical'
+        self.orientation = "vertical"
         self.padding = dp(10)
         self.spacing = dp(10)
 
         self.api_url = "https://api.exchangerate-api.com/v4/latest/"
         self.rates = {}
-        self.currencies = sorted([
-            "USD", "EUR", "JPY", "GBP", "AUD", "CAD", "CHF", "CNY",
-            "INR", "BRL", "RUB", "ZAR", "SGD", "NZD", "MXN", "KRW",
-        ])
+        self.currencies = sorted(
+            [
+                "USD",
+                "EUR",
+                "JPY",
+                "GBP",
+                "AUD",
+                "CAD",
+                "CHF",
+                "CNY",
+                "INR",
+                "BRL",
+                "RUB",
+                "ZAR",
+                "SGD",
+                "NZD",
+                "MXN",
+                "KRW",
+            ]
+        )
         self.from_currency = "USD"
         self.to_currency = "INR"
 
@@ -359,39 +379,55 @@ class CurrencyConverterWidget(BoxLayout):
 
     def build_ui(self):
         # Title
-        self.add_widget(VintageLabel(
-            text="Currency Converter",
-            size_hint_y=None,
-            height=dp(40),
-            font_size=sp(20),
-            halign="center"
-        ))
+        self.add_widget(
+            VintageLabel(
+                text="Currency Converter",
+                size_hint_y=None,
+                height=dp(40),
+                font_size=sp(20),
+                halign="center",
+            )
+        )
 
         # Amount input
-        amount_layout = BoxLayout(orientation='horizontal', size_hint_y=None, height=dp(50))
-        amount_layout.add_widget(VintageLabel(text="Amount:", size_hint_x=None, width=dp(80)))
+        amount_layout = BoxLayout(
+            orientation="horizontal", size_hint_y=None, height=dp(50)
+        )
+        amount_layout.add_widget(
+            VintageLabel(text="Amount:", size_hint_x=None, width=dp(80))
+        )
         self.amount_input = VintageTextInput(text="1.0")
         amount_layout.add_widget(self.amount_input)
         self.add_widget(amount_layout)
 
         # From currency
-        from_layout = BoxLayout(orientation='horizontal', size_hint_y=None, height=dp(50))
-        from_layout.add_widget(VintageLabel(text="From:", size_hint_x=None, width=dp(80)))
-        self.from_btn = VintageButton(text=self.from_currency, size_hint_x=None, width=dp(120))
+        from_layout = BoxLayout(
+            orientation="horizontal", size_hint_y=None, height=dp(50)
+        )
+        from_layout.add_widget(
+            VintageLabel(text="From:", size_hint_x=None, width=dp(80))
+        )
+        self.from_btn = VintageButton(
+            text=self.from_currency, size_hint_x=None, width=dp(120)
+        )
         self.from_btn.bind(on_release=self.show_from_dropdown)
         from_layout.add_widget(self.from_btn)
         self.add_widget(from_layout)
 
         # To currency
-        to_layout = BoxLayout(orientation='horizontal', size_hint_y=None, height=dp(50))
+        to_layout = BoxLayout(orientation="horizontal", size_hint_y=None, height=dp(50))
         to_layout.add_widget(VintageLabel(text="To:", size_hint_x=None, width=dp(80)))
-        self.to_btn = VintageButton(text=self.to_currency, size_hint_x=None, width=dp(120))
+        self.to_btn = VintageButton(
+            text=self.to_currency, size_hint_x=None, width=dp(120)
+        )
         self.to_btn.bind(on_release=self.show_to_dropdown)
         to_layout.add_widget(self.to_btn)
         self.add_widget(to_layout)
 
         # Action buttons
-        button_layout = BoxLayout(orientation='horizontal', size_hint_y=None, height=dp(50), spacing=dp(10))
+        button_layout = BoxLayout(
+            orientation="horizontal", size_hint_y=None, height=dp(50), spacing=dp(10)
+        )
 
         convert_btn = VintageButton(text="Convert")
         convert_btn.bind(on_release=lambda x: self.convert_currency())
@@ -405,10 +441,7 @@ class CurrencyConverterWidget(BoxLayout):
 
         # Result display
         self.result_label = VintageLabel(
-            text="",
-            size_hint_y=None,
-            height=dp(60),
-            halign="center"
+            text="", size_hint_y=None, height=dp(60), halign="center"
         )
         self.add_widget(self.result_label)
 
@@ -418,16 +451,12 @@ class CurrencyConverterWidget(BoxLayout):
             size_hint_y=None,
             height=dp(40),
             font_size=sp(12),
-            halign="center"
+            halign="center",
         )
         self.add_widget(self.status_label)
 
         self.update_msg = VintageLabel(
-            text="",
-            size_hint_y=None,
-            height=dp(40),
-            font_size=sp(12),
-            halign="center"
+            text="", size_hint_y=None, height=dp(40), font_size=sp(12), halign="center"
         )
         self.add_widget(self.update_msg)
 
@@ -441,7 +470,11 @@ class CurrencyConverterWidget(BoxLayout):
         dropdown = DropDown()
         for currency in self.currencies:
             btn = VintageButton(text=currency, size_hint_y=None, height=dp(40))
-            btn.bind(on_release=lambda x, curr=currency: self.select_currency(curr, is_from, dropdown))
+            btn.bind(
+                on_release=lambda x, curr=currency: self.select_currency(
+                    curr, is_from, dropdown
+                )
+            )
             dropdown.add_widget(btn)
         dropdown.open(instance)
 
@@ -463,6 +496,7 @@ class CurrencyConverterWidget(BoxLayout):
 
         try:
             import threading
+
             thread = threading.Thread(target=self._fetch_rates, args=(show_msg,))
             thread.daemon = True
             thread.start()
@@ -474,9 +508,13 @@ class CurrencyConverterWidget(BoxLayout):
 
     def _fetch_rates(self, show_msg):
         try:
-            data = requests.get(f"{self.api_url}{self.from_currency}", timeout=10).json()
+            data = requests.get(
+                f"{self.api_url}{self.from_currency}", timeout=10
+            ).json()
             self.rates = data.get("rates", {})
-            Clock.schedule_once(lambda dt: self._update_ui_after_fetch(data, show_msg), 0)
+            Clock.schedule_once(
+                lambda dt: self._update_ui_after_fetch(data, show_msg), 0
+            )
         except Exception:
             Clock.schedule_once(lambda dt: self._update_ui_error(show_msg), 0)
 
@@ -485,7 +523,7 @@ class CurrencyConverterWidget(BoxLayout):
         if show_msg:
             self.update_msg.text = f"✓ Updated rates for {self.from_currency}!"
             self.update_msg.color = (0, 0.5, 0, 1)  # Green
-            Clock.schedule_once(lambda dt: setattr(self.update_msg, 'text', ''), 5)
+            Clock.schedule_once(lambda dt: setattr(self.update_msg, "text", ""), 5)
 
     def _update_ui_error(self, show_msg):
         self.status_label.text = "Error updating rates"
@@ -500,11 +538,14 @@ class CurrencyConverterWidget(BoxLayout):
             if rate is None:
                 raise ValueError("Rate missing")
             result = amount * rate
-            self.result_label.text = f"{amount:.2f} {self.from_currency} = {result:.2f} {self.to_currency}"
+            self.result_label.text = (
+                f"{amount:.2f} {self.from_currency} = {result:.2f} {self.to_currency}"
+            )
             self.result_label.color = INK_DARK
         except Exception:
             self.result_label.text = "Error: Check amount/rates"
             self.result_label.color = (1, 0, 0, 1)
+
 
 if __name__ == "__main__":
     FinancialApp().run()

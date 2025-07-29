@@ -1,6 +1,7 @@
 """
 Enhanced Vintage-styled Tkinter app with stable button colors for macOS - FIXED
 """
+
 import tkinter as tk
 from tkinter import font as tkFont
 import math
@@ -32,54 +33,50 @@ class FinancialApp(tk.Tk):
 
         # Enhanced button style with stable colors for macOS
         self.button_style = {
-            'bg': BUTTON_BG,
-            'fg': BUTTON_TEXT,
-            'activebackground': BUTTON_BG,  # Same as normal bg
-            'activeforeground': BUTTON_TEXT,  # Same as normal fg
-            'font': self.vintage_font,
-            'bd': 3,  # Slightly thicker border
-            'relief': tk.RAISED,
-            'cursor': 'hand2',
-            'highlightthickness': 0,  # Remove focus highlight
-            'borderwidth': 3,
-            'padx': 5,
-            'pady': 3
+            "bg": BUTTON_BG,
+            "fg": BUTTON_TEXT,
+            "activebackground": BUTTON_BG,  # Same as normal bg
+            "activeforeground": BUTTON_TEXT,  # Same as normal fg
+            "font": self.vintage_font,
+            "bd": 3,  # Slightly thicker border
+            "relief": tk.RAISED,
+            "cursor": "hand2",
+            "highlightthickness": 0,  # Remove focus highlight
+            "borderwidth": 3,
+            "padx": 5,
+            "pady": 3,
         }
 
         # Menubutton style (for dropdowns)
         self.menubutton_style = {
-            'bg': BUTTON_BG,
-            'fg': BUTTON_TEXT,
-            'activebackground': BUTTON_BG,
-            'activeforeground': BUTTON_TEXT,
-            'font': self.vintage_font,
-            'bd': 3,
-            'relief': tk.RAISED,
-            'cursor': 'hand2',
-            'highlightthickness': 0,
-            'borderwidth': 3,
-            'padx': 5,
-            'pady': 3
+            "bg": BUTTON_BG,
+            "fg": BUTTON_TEXT,
+            "activebackground": BUTTON_BG,
+            "activeforeground": BUTTON_TEXT,
+            "font": self.vintage_font,
+            "bd": 3,
+            "relief": tk.RAISED,
+            "cursor": "hand2",
+            "highlightthickness": 0,
+            "borderwidth": 3,
+            "padx": 5,
+            "pady": 3,
         }
 
         # Entry style
         self.entry_style = {
-            'bg': ENTRY_BG,
-            'fg': INK_DARK,
-            'font': self.vintage_font,
-            'bd': 2,
-            'relief': tk.GROOVE,
-            'insertbackground': INK_DARK,
-            'selectbackground': BUTTON_BG,
-            'selectforeground': BUTTON_TEXT
+            "bg": ENTRY_BG,
+            "fg": INK_DARK,
+            "font": self.vintage_font,
+            "bd": 2,
+            "relief": tk.GROOVE,
+            "insertbackground": INK_DARK,
+            "selectbackground": BUTTON_BG,
+            "selectforeground": BUTTON_TEXT,
         }
 
         # Label style
-        self.label_style = {
-            'bg': PAPER_BG,
-            'fg': INK_DARK,
-            'font': self.vintage_font
-        }
+        self.label_style = {"bg": PAPER_BG, "fg": INK_DARK, "font": self.vintage_font}
 
         self.setup_layout()
 
@@ -95,8 +92,10 @@ class FinancialApp(tk.Tk):
             btn.config(bg=BUTTON_HOVER, activebackground=BUTTON_HOVER)
 
         def on_leave(e):
-            btn.config(bg=button_config.get('bg', BUTTON_BG),
-                       activebackground=button_config.get('bg', BUTTON_BG))
+            btn.config(
+                bg=button_config.get("bg", BUTTON_BG),
+                activebackground=button_config.get("bg", BUTTON_BG),
+            )
 
         def on_press(e):
             btn.config(relief=tk.SUNKEN)
@@ -124,8 +123,10 @@ class FinancialApp(tk.Tk):
             btn.config(bg=BUTTON_HOVER, activebackground=BUTTON_HOVER)
 
         def on_leave(e):
-            btn.config(bg=menubutton_config.get('bg', BUTTON_BG),
-                       activebackground=menubutton_config.get('bg', BUTTON_BG))
+            btn.config(
+                bg=menubutton_config.get("bg", BUTTON_BG),
+                activebackground=menubutton_config.get("bg", BUTTON_BG),
+            )
 
         btn.bind("<Enter>", on_enter)
         btn.bind("<Leave>", on_leave)
@@ -169,7 +170,9 @@ class CalculatorFrame(tk.Frame):
         header = tk.Frame(self, bg=PAPER_BG)
         header.pack(pady=10)
 
-        tk.Label(header, text="Calculator Type:", **self.app.label_style).pack(side="left")
+        tk.Label(header, text="Calculator Type:", **self.app.label_style).pack(
+            side="left"
+        )
 
         self.mode = tk.StringVar(value="Basic")
 
@@ -177,13 +180,21 @@ class CalculatorFrame(tk.Frame):
         self.mode_button = self.app.create_stable_menubutton(header, "Basic")
         self.mode_button.pack(side="left", padx=15)
 
-        mode_menu = tk.Menu(self.mode_button, tearoff=0,
-                            bg=BUTTON_BG, fg=BUTTON_TEXT,
-                            activebackground=BUTTON_HOVER, activeforeground=BUTTON_TEXT,
-                            font=self.app.vintage_font, bd=2)
+        mode_menu = tk.Menu(
+            self.mode_button,
+            tearoff=0,
+            bg=BUTTON_BG,
+            fg=BUTTON_TEXT,
+            activebackground=BUTTON_HOVER,
+            activeforeground=BUTTON_TEXT,
+            font=self.app.vintage_font,
+            bd=2,
+        )
 
         for mode in ["Basic", "Scientific", "Financial"]:
-            mode_menu.add_command(label=mode, command=lambda m=mode: self.change_mode(m))
+            mode_menu.add_command(
+                label=mode, command=lambda m=mode: self.change_mode(m)
+            )
 
         self.mode_button.config(menu=mode_menu)  # Now this works!
 
@@ -211,42 +222,61 @@ class CalculatorFrame(tk.Frame):
 
         # Display with better contrast
         self.display_var = tk.StringVar()
-        display = tk.Entry(frame, textvariable=self.display_var, state="readonly",
-                           justify="right", readonlybackground=ENTRY_BG,
-                           fg=INK_DARK, font=self.app.vintage_font, bd=3,
-                           relief=tk.SUNKEN, highlightthickness=0)
-        display.grid(row=0, column=0, columnspan=5, sticky="nsew", pady=(0, 10), ipady=8)
+        display = tk.Entry(
+            frame,
+            textvariable=self.display_var,
+            state="readonly",
+            justify="right",
+            readonlybackground=ENTRY_BG,
+            fg=INK_DARK,
+            font=self.app.vintage_font,
+            bd=3,
+            relief=tk.SUNKEN,
+            highlightthickness=0,
+        )
+        display.grid(
+            row=0, column=0, columnspan=5, sticky="nsew", pady=(0, 10), ipady=8
+        )
 
         # Button layouts
         layouts = {
             "Basic": [
-                ('7', '8', '9', '/'),
-                ('4', '5', '6', '*'),
-                ('1', '2', '3', '-'),
-                ('0', '.', '=', '+'),
-                ('Clear',)
+                ("7", "8", "9", "/"),
+                ("4", "5", "6", "*"),
+                ("1", "2", "3", "-"),
+                ("0", ".", "=", "+"),
+                ("Clear",),
             ],
             "Scientific": [
-                ('sin', 'cos', 'tan', '^', 'sqrt'),
-                ('log', 'ln', '(', ')', 'π'),
-                ('7', '8', '9', '/', 'C'),
-                ('4', '5', '6', '*'),
-                ('1', '2', '3', '-'),
-                ('0', '.', '=', '+')
-            ]
+                ("sin", "cos", "tan", "^", "sqrt"),
+                ("log", "ln", "(", ")", "π"),
+                ("7", "8", "9", "/", "C"),
+                ("4", "5", "6", "*"),
+                ("1", "2", "3", "-"),
+                ("0", ".", "=", "+"),
+            ],
         }
 
         layout = layouts[mode]
 
         for r, row in enumerate(layout, 1):
             for c, char in enumerate(row):
-                colspan = 4 if char == 'Clear' and mode == "Basic" else 1
+                colspan = 4 if char == "Clear" and mode == "Basic" else 1
 
                 # Use the stable button creation method
-                btn = self.app.create_stable_button(frame, char,
-                                                    command=lambda ch=char: self.button_press(ch))
-                btn.grid(row=r, column=c, columnspan=colspan, sticky="nsew",
-                         padx=2, pady=2, ipadx=5, ipady=5)
+                btn = self.app.create_stable_button(
+                    frame, char, command=lambda ch=char: self.button_press(ch)
+                )
+                btn.grid(
+                    row=r,
+                    column=c,
+                    columnspan=colspan,
+                    sticky="nsew",
+                    padx=2,
+                    pady=2,
+                    ipadx=5,
+                    ipady=5,
+                )
 
         # Configure grid
         cols = 5 if mode == "Scientific" else 4
@@ -262,14 +292,20 @@ class CalculatorFrame(tk.Frame):
             self.expression = ""
         elif char == "=":
             try:
-                exp = self.expression.replace('^', '**').replace('π', str(math.pi))
-                for old, new in {'sqrt': 'math.sqrt', 'sin': 'math.sin', 'cos': 'math.cos',
-                                 'tan': 'math.tan', 'log': 'math.log10', 'ln': 'math.log'}.items():
+                exp = self.expression.replace("^", "**").replace("π", str(math.pi))
+                for old, new in {
+                    "sqrt": "math.sqrt",
+                    "sin": "math.sin",
+                    "cos": "math.cos",
+                    "tan": "math.tan",
+                    "log": "math.log10",
+                    "ln": "math.log",
+                }.items():
                     exp = exp.replace(f"{old}(", f"{new}(")
                 self.expression = str(eval(exp, {"__builtins__": None}, {"math": math}))
             except:
                 self.expression = "Error"
-        elif char in ('sin', 'cos', 'tan', 'log', 'ln', 'sqrt'):
+        elif char in ("sin", "cos", "tan", "log", "ln", "sqrt"):
             self.expression += f"{char}("
         else:
             if self.expression == "Error":
@@ -292,13 +328,16 @@ class CalculatorFrame(tk.Frame):
         for tab in tabs:
             # Use stable button with special styling for tabs
             is_active = tab == self.current_tab.get()
-            btn = self.app.create_stable_button(tab_frame, tab,
-                                                command=lambda t=tab: self.switch_tab(t),
-                                                bg=BUTTON_BG if is_active else PAPER_BG,
-                                                fg=BUTTON_TEXT if is_active else INK_DARK,
-                                                activebackground=BUTTON_BG if is_active else PAPER_BG,
-                                                activeforeground=BUTTON_TEXT if is_active else INK_DARK,
-                                                font=self.app.small_font)
+            btn = self.app.create_stable_button(
+                tab_frame,
+                tab,
+                command=lambda t=tab: self.switch_tab(t),
+                bg=BUTTON_BG if is_active else PAPER_BG,
+                fg=BUTTON_TEXT if is_active else INK_DARK,
+                activebackground=BUTTON_BG if is_active else PAPER_BG,
+                activeforeground=BUTTON_TEXT if is_active else INK_DARK,
+                font=self.app.small_font,
+            )
             btn.pack(side="left", padx=2, fill="x", expand=True)
             self.tab_buttons.append((btn, tab))
 
@@ -319,7 +358,7 @@ class CalculatorFrame(tk.Frame):
                 bg=BUTTON_BG if is_active else PAPER_BG,
                 fg=BUTTON_TEXT if is_active else INK_DARK,
                 activebackground=BUTTON_BG if is_active else PAPER_BG,
-                activeforeground=BUTTON_TEXT if is_active else INK_DARK
+                activeforeground=BUTTON_TEXT if is_active else INK_DARK,
             )
 
         # Clear and reload content
@@ -341,24 +380,31 @@ class CalculatorFrame(tk.Frame):
 
         for i, field in enumerate(fields):
             tk.Label(self.content_frame, text=f"{field}:", **self.app.label_style).grid(
-                row=i, column=0, sticky="e", padx=10, pady=5)
+                row=i, column=0, sticky="e", padx=10, pady=5
+            )
             entry = tk.Entry(self.content_frame, **self.app.entry_style, width=15)
             entry.grid(row=i, column=1, sticky="w", padx=10, pady=5)
             self.entries[field] = entry
 
         if tab_type == "Compound Interest":
-            tk.Label(self.content_frame, text="Compounds/year:", **self.app.label_style).grid(
-                row=3, column=0, sticky="e", padx=10, pady=5)
+            tk.Label(
+                self.content_frame, text="Compounds/year:", **self.app.label_style
+            ).grid(row=3, column=0, sticky="e", padx=10, pady=5)
             entry = tk.Entry(self.content_frame, **self.app.entry_style, width=15)
             entry.grid(row=3, column=1, sticky="w", padx=10, pady=5)
             self.entries["Compounds"] = entry
 
-        self.result_label = tk.Label(self.content_frame, text="", **self.app.label_style, wraplength=400)
+        self.result_label = tk.Label(
+            self.content_frame, text="", **self.app.label_style, wraplength=400
+        )
         self.result_label.grid(row=5, column=0, columnspan=2, pady=20)
 
         # Use stable button
-        calc_btn = self.app.create_stable_button(self.content_frame, "Calculate",
-                                                 command=lambda: self.calculate_interest(tab_type))
+        calc_btn = self.app.create_stable_button(
+            self.content_frame,
+            "Calculate",
+            command=lambda: self.calculate_interest(tab_type),
+        )
         calc_btn.grid(row=4, column=0, columnspan=2, pady=10, sticky="ew")
 
         for i in range(2):
@@ -373,16 +419,22 @@ class CalculatorFrame(tk.Frame):
             if calc_type == "Simple Interest":
                 si = P * R * T
                 total = P + si
-                self.result_label.config(text=f"Simple Interest: ${si:.2f}\nTotal Amount: ${total:.2f}",
-                                         fg=SUCCESS_COLOR)
+                self.result_label.config(
+                    text=f"Simple Interest: ${si:.2f}\nTotal Amount: ${total:.2f}",
+                    fg=SUCCESS_COLOR,
+                )
             else:
                 n = int(self.entries["Compounds"].get())
                 amount = P * (1 + R / n) ** (n * T)
                 ci = amount - P
-                self.result_label.config(text=f"Compound Interest: ${ci:.2f}\nTotal Amount: ${amount:.2f}",
-                                         fg=SUCCESS_COLOR)
+                self.result_label.config(
+                    text=f"Compound Interest: ${ci:.2f}\nTotal Amount: ${amount:.2f}",
+                    fg=SUCCESS_COLOR,
+                )
         except:
-            self.result_label.config(text="Error: Please enter valid numbers", fg=ERROR_COLOR)
+            self.result_label.config(
+                text="Error: Please enter valid numbers", fg=ERROR_COLOR
+            )
 
     def create_loan_tab(self):
         fields = ["Loan Amount", "Rate % per year", "Term years"]
@@ -390,17 +442,21 @@ class CalculatorFrame(tk.Frame):
 
         for i, field in enumerate(fields):
             tk.Label(self.content_frame, text=f"{field}:", **self.app.label_style).grid(
-                row=i, column=0, sticky="e", padx=10, pady=5)
+                row=i, column=0, sticky="e", padx=10, pady=5
+            )
             entry = tk.Entry(self.content_frame, **self.app.entry_style, width=15)
             entry.grid(row=i, column=1, sticky="w", padx=10, pady=5)
             self.entries[field] = entry
 
-        self.result_label = tk.Label(self.content_frame, text="", **self.app.label_style)
+        self.result_label = tk.Label(
+            self.content_frame, text="", **self.app.label_style
+        )
         self.result_label.grid(row=4, column=0, columnspan=2, pady=20)
 
         # Use stable button
-        calc_btn = self.app.create_stable_button(self.content_frame, "Calculate EMI",
-                                                 command=self.calculate_loan)
+        calc_btn = self.app.create_stable_button(
+            self.content_frame, "Calculate EMI", command=self.calculate_loan
+        )
         calc_btn.grid(row=3, column=0, columnspan=2, pady=10, sticky="ew")
 
         for i in range(2):
@@ -422,7 +478,9 @@ class CalculatorFrame(tk.Frame):
 
             self.result_label.config(text=f"Monthly EMI: ${emi:.2f}", fg=SUCCESS_COLOR)
         except:
-            self.result_label.config(text="Error: Please enter valid numbers", fg=ERROR_COLOR)
+            self.result_label.config(
+                text="Error: Please enter valid numbers", fg=ERROR_COLOR
+            )
 
 
 class CurrencyConverterFrame(tk.Frame):
@@ -431,10 +489,43 @@ class CurrencyConverterFrame(tk.Frame):
         self.app = app
         self.api_url = "https://api.exchangerate-api.com/v4/latest/"
         self.rates = {}
-        self.currencies = sorted(['USD', 'EUR', 'JPY', 'GBP', 'AUD', 'CAD', 'CHF', 'CNY',
-                                  'INR', 'BRL', 'RUB', 'ZAR', 'SGD', 'NZD', 'MXN', 'KRW', 'NOK',
-                                  'SEK', 'DKK', 'PLN', 'HUF', 'CZK', 'ILS', 'PHP', 'THB', 'MYR',
-                                  'IDR', 'HKD', 'ISK', 'HRK', 'BGN', 'RON', 'TRY'])
+        self.currencies = sorted(
+            [
+                "USD",
+                "EUR",
+                "JPY",
+                "GBP",
+                "AUD",
+                "CAD",
+                "CHF",
+                "CNY",
+                "INR",
+                "BRL",
+                "RUB",
+                "ZAR",
+                "SGD",
+                "NZD",
+                "MXN",
+                "KRW",
+                "NOK",
+                "SEK",
+                "DKK",
+                "PLN",
+                "HUF",
+                "CZK",
+                "ILS",
+                "PHP",
+                "THB",
+                "MYR",
+                "IDR",
+                "HKD",
+                "ISK",
+                "HRK",
+                "BGN",
+                "RON",
+                "TRY",
+            ]
+        )
         self.create_widgets()
         self.update_rates()
 
@@ -458,13 +549,21 @@ class CurrencyConverterFrame(tk.Frame):
         self.from_button = self.app.create_stable_menubutton(from_frame, "USD")
         self.from_button.pack(side="left", padx=10)
 
-        from_menu = tk.Menu(self.from_button, tearoff=0, bg=BUTTON_BG, fg=BUTTON_TEXT,
-                            activebackground=BUTTON_HOVER, activeforeground=BUTTON_TEXT,
-                            font=self.app.vintage_font, bd=2)
+        from_menu = tk.Menu(
+            self.from_button,
+            tearoff=0,
+            bg=BUTTON_BG,
+            fg=BUTTON_TEXT,
+            activebackground=BUTTON_HOVER,
+            activeforeground=BUTTON_TEXT,
+            font=self.app.vintage_font,
+            bd=2,
+        )
 
         for currency in self.currencies:
-            from_menu.add_command(label=currency,
-                                  command=lambda c=currency: self.change_from_currency(c))
+            from_menu.add_command(
+                label=currency, command=lambda c=currency: self.change_from_currency(c)
+            )
 
         self.from_button.config(menu=from_menu)
 
@@ -477,22 +576,34 @@ class CurrencyConverterFrame(tk.Frame):
         self.to_button = self.app.create_stable_menubutton(to_frame, "INR")
         self.to_button.pack(side="left", padx=10)
 
-        to_menu = tk.Menu(self.to_button, tearoff=0, bg=BUTTON_BG, fg=BUTTON_TEXT,
-                          activebackground=BUTTON_HOVER, activeforeground=BUTTON_TEXT,
-                          font=self.app.vintage_font, bd=2)
+        to_menu = tk.Menu(
+            self.to_button,
+            tearoff=0,
+            bg=BUTTON_BG,
+            fg=BUTTON_TEXT,
+            activebackground=BUTTON_HOVER,
+            activeforeground=BUTTON_TEXT,
+            font=self.app.vintage_font,
+            bd=2,
+        )
 
         for currency in self.currencies:
-            to_menu.add_command(label=currency,
-                                command=lambda c=currency: self.change_to_currency(c))
+            to_menu.add_command(
+                label=currency, command=lambda c=currency: self.change_to_currency(c)
+            )
 
         self.to_button.config(menu=to_menu)
 
         # Convert button
-        convert_btn = self.app.create_stable_button(self, "Convert", command=self.convert)
+        convert_btn = self.app.create_stable_button(
+            self, "Convert", command=self.convert
+        )
         convert_btn.pack(fill="x", padx=20, pady=(20, 10))
 
         # Update Rates button
-        update_btn = self.app.create_stable_button(self, "Update Rates", command=self.manual_update_rates)
+        update_btn = self.app.create_stable_button(
+            self, "Update Rates", command=self.manual_update_rates
+        )
         update_btn.pack(fill="x", padx=20, pady=(0, 20))
 
         # Result display
@@ -500,16 +611,24 @@ class CurrencyConverterFrame(tk.Frame):
         self.result_label.pack(pady=10)
 
         # Update message display
-        self.update_message = tk.Label(self, text="",
-                                       bg=PAPER_BG, fg=SUCCESS_COLOR,
-                                       font=self.app.small_font,
-                                       wraplength=300)
+        self.update_message = tk.Label(
+            self,
+            text="",
+            bg=PAPER_BG,
+            fg=SUCCESS_COLOR,
+            font=self.app.small_font,
+            wraplength=300,
+        )
         self.update_message.pack(pady=5)
 
         # Status display
-        self.status_label = tk.Label(self, text="Fetching rates...",
-                                     bg=PAPER_BG, fg=INK_DARK,
-                                     font=self.app.small_font)
+        self.status_label = tk.Label(
+            self,
+            text="Fetching rates...",
+            bg=PAPER_BG,
+            fg=INK_DARK,
+            font=self.app.small_font,
+        )
         self.status_label.pack(side="bottom", fill="x", pady=5)
 
     def change_from_currency(self, currency):
@@ -536,29 +655,33 @@ class CurrencyConverterFrame(tk.Frame):
             data = response.json()
             self.rates = data.get("rates", {})
 
-            self.status_label.config(text=f"Rates updated: {data.get('date', 'Unknown date')}")
+            self.status_label.config(
+                text=f"Rates updated: {data.get('date', 'Unknown date')}"
+            )
 
             if show_message:
                 rate_count = len(self.rates)
                 self.update_message.config(
                     text=f"✓ Successfully updated {rate_count} exchange rates for {base}!",
-                    fg=SUCCESS_COLOR
+                    fg=SUCCESS_COLOR,
                 )
                 self.after(5000, lambda: self.update_message.config(text=""))
 
         except requests.exceptions.RequestException:
-            self.status_label.config(text="Error: Network issue - Could not fetch rates")
+            self.status_label.config(
+                text="Error: Network issue - Could not fetch rates"
+            )
             if show_message:
                 self.update_message.config(
                     text="✗ Failed to update rates. Please check your internet connection.",
-                    fg=ERROR_COLOR
+                    fg=ERROR_COLOR,
                 )
         except Exception:
             self.status_label.config(text="Error: Could not fetch rates")
             if show_message:
                 self.update_message.config(
                     text="✗ An error occurred while updating rates. Please try again.",
-                    fg=ERROR_COLOR
+                    fg=ERROR_COLOR,
                 )
 
     def manual_update_rates(self):
@@ -571,7 +694,9 @@ class CurrencyConverterFrame(tk.Frame):
             to_curr = self.to_var.get()
 
             if not self.rates:
-                self.result_label.config(text="Error: No rates available", fg=ERROR_COLOR)
+                self.result_label.config(
+                    text="Error: No rates available", fg=ERROR_COLOR
+                )
                 return
 
             rate = self.rates.get(to_curr)
@@ -580,11 +705,15 @@ class CurrencyConverterFrame(tk.Frame):
                 return
 
             converted = amount * rate
-            self.result_label.config(text=f"{amount:.2f} {from_curr} = {converted:.2f} {to_curr}",
-                                     fg=SUCCESS_COLOR)
+            self.result_label.config(
+                text=f"{amount:.2f} {from_curr} = {converted:.2f} {to_curr}",
+                fg=SUCCESS_COLOR,
+            )
 
         except ValueError:
-            self.result_label.config(text="Error: Please enter a valid amount", fg=ERROR_COLOR)
+            self.result_label.config(
+                text="Error: Please enter a valid amount", fg=ERROR_COLOR
+            )
         except:
             self.result_label.config(text="Error: Conversion failed", fg=ERROR_COLOR)
 
