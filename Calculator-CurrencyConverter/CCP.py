@@ -1,6 +1,3 @@
-"""
-Enhanced Vintage-styled Tkinter app with stable button colors for macOS - FIXED
-"""
 
 import tkinter as tk
 from tkinter import font as tkFont

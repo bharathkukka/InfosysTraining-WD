@@ -1,7 +1,3 @@
-"""
-Vintage-Styled Financial Toolkit - Kivy Version
-Converted from tkinter to Kivy for cross-platform compatibility
-"""
 
 import math
 import requests
@@ -31,12 +27,12 @@ class FinancialApp(App):
         Window.size = (800, 600)
         Window.clearcolor = CREAM_BG
 
-        # Create main layout
+        #  main layout
         main_layout = BoxLayout(
             orientation="horizontal", padding=dp(15), spacing=dp(15)
         )
 
-        # Create left and right panels
+        #  left and right panels
         left_panel = BoxLayout(orientation="vertical", size_hint=(0.5, 1))
         right_panel = BoxLayout(orientation="vertical", size_hint=(0.5, 1))
 

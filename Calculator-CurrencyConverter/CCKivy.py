@@ -1,4 +1,3 @@
-# Let me create the main Kivy application file first
 kivy_app_code = '''"""
 Vintage-Styled Financial Toolkit - Kivy Version
 Converted from tkinter to Kivy for cross-platform compatibility
@@ -511,7 +510,7 @@ if __name__ == "__main__":
     FinancialApp().run()
 '''
 
-# Save the main application file
+# Save main application file
 with open("CalculatorCurrencyKivy.py", "w") as f:
     f.write(kivy_app_code)
 
