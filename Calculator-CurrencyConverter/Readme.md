@@ -19,36 +19,6 @@ A financial calculator and currency converter application built with Python's Tk
 - Automatic rate updates with manual refresh option
 - Clean, intuitive interface with dropdown currency selection
 
-## 🎯 Design Philosophy
-
-The application features a distinctive vintage aesthetic with:
-- **Comic Sans MS** font for a handwritten feel
-- **Cream and paper** color scheme (#FAF3E0, #F5E6C4)
-- **Dark ink** styling (#5B4636) for text
-- Groove borders and classic button styling
-
-## 📋 Requirements
-
-- Python 3.6+
-- Required packages:
-  ```
-  tkinter (usually comes with Python)
-  requests
-  math (built-in)
-  ```
-
-## 🚀 Installation
-
-1. **Clone or download** the repository
-2. **Install dependencies**:
-   ```bash
-   pip install requests
-   ```
-3. **Run the application**:
-   ```bash
-   python financial_app.py
-   ```
-
 ## 💡 Usage
 
 ### Calculator
@@ -81,8 +51,40 @@ The currency converter uses the **ExchangeRate-API** service:
 ![Calculator and Currency Converter](https://github.com/bhaarath22/WebDev-AI-Projects/blob/cfee272c1f8cebf3bdab01efeb4053d668ad3237/Calculator-CurrencyConverter/Data/SC.png)
 
 ![Calculator and Currency Converter](https://github.com/bhaarath22/WebDev-AI-Projects/blob/cfee272c1f8cebf3bdab01efeb4053d668ad3237/Calculator-CurrencyConverter/Data/LC.png)  
----
-### ***Issue**
+---  
+
+## 🎯 Design Philosophy
+
+The application features a distinctive vintage aesthetic with:
+- **Comic Sans MS** font for a handwritten feel
+- **Cream and paper** color scheme (#FAF3E0, #F5E6C4)
+- **Dark ink** styling (#5B4636) for text
+- Groove borders and classic button styling
+
+## 📋 Requirements
+
+- Python 3.6+
+- Required packages:
+  ```
+  tkinter (usually comes with Python)
+  requests
+  math (built-in)
+  ```
+
+## 🚀 Installation
+
+1. **Clone or download** the repository
+2. **Install dependencies**:
+   ```bash
+   pip install requests
+   ```
+3. **Run the application**:
+   ```bash
+   python financial_app.py
+   ```
+
+   
+### ***Issue***
 
 ### 🐛 Issue: Invisible Button Text on macOS
 
@@ -124,14 +126,6 @@ This small change restored button labels on macOS and improved the overall UI co
 
 
 ## 🔧 Technical Details
-
-### File Structure
-```
-financial_app.py          # Main application file
-├── FinancialApp          # Main window class
-├── CalculatorFrame       # Calculator component
-└── CurrencyConverterFrame # Currency converter component
-```
 
 ### Key Classes
 - **FinancialApp**: Main application window and styling setup
