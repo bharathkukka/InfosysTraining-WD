@@ -8,8 +8,6 @@ Welcome to my portfolio! This repository summarizes the projects I built and the
 
 I successfully completed the comprehensive training program covering Python, UI development with Tkinter, and full-stack web development using Django and Flask.
 
-*(To add your certificate image, first upload the image file to your repository, then replace the link below)*
-
 ![Course Certificate](link_to_your_certificate_image.jpg)
 
 ---
