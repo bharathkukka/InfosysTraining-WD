@@ -29,14 +29,24 @@ A financial calculator and currency converter application built with Python's Tk
    - Fill in the required fields (Principal, Rate, Time, etc.)
    - Click "Calculate" to get results
 
-### Currency Converter
+
+## Results 
+
+![Calculator and Currency Converter](https://github.com/bhaarath22/WebDev-AI-Projects/blob/3baefc92cb5715aa79e98a1011eedb6f51bfb85a/Calculator-CurrencyConverter/Data/BC.png)
+
+
+  ### Currency Converter
 1. **Enter amount** in the input field
 2. **Select source currency** from the "From" dropdown
 3. **Select target currency** from the "To" dropdown  
 4. **Click "Convert"** to see the result
 5. **Update rates** manually using the "Update Rates" button
 
-## 🌐 API Information
+  
+![Calculator and Currency Converter](https://github.com/bhaarath22/WebDev-AI-Projects/blob/cfee272c1f8cebf3bdab01efeb4053d668ad3237/Calculator-CurrencyConverter/Data/SC.png)
+
+  
+  ## 🌐 API Information
 
 The currency converter uses the **ExchangeRate-API** service:
 - **Endpoint**: `https://api.exchangerate-api.com/v4/latest/`
@@ -44,11 +54,6 @@ The currency converter uses the **ExchangeRate-API** service:
 - **Rate limits**: Check API documentation for current limits
 - **Supported currencies**: USD, EUR, JPY, GBP, AUD, CAD, CHF, CNY, INR, BRL, RUB, ZAR, SGD, NZD, MXN, KRW
 
-## Results 
-
-![Calculator and Currency Converter](https://github.com/bhaarath22/WebDev-AI-Projects/blob/3baefc92cb5715aa79e98a1011eedb6f51bfb85a/Calculator-CurrencyConverter/Data/BC.png)
-
-![Calculator and Currency Converter](https://github.com/bhaarath22/WebDev-AI-Projects/blob/cfee272c1f8cebf3bdab01efeb4053d668ad3237/Calculator-CurrencyConverter/Data/SC.png)
 
 ![Calculator and Currency Converter](https://github.com/bhaarath22/WebDev-AI-Projects/blob/cfee272c1f8cebf3bdab01efeb4053d668ad3237/Calculator-CurrencyConverter/Data/LC.png)  
 ---  
