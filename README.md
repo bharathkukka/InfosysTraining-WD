@@ -21,7 +21,7 @@ Here are the projects I developed during the course. Each project has its own re
 ### 1. **Calculator App**
 * **Description**: A simple desktop calculator with a graphical user interface. This project was my introduction to event-driven programming and GUI development.
 * **Technologies**: `Python`, `Tkinter`
-* **Repository Link**: [**calculator-tkinter**](https://github.com/bharathkukka/InfosysTraining-WD/tree/3baefc92cb5715aa79e98a1011eedb6f51bfb85a/Calculator-CurrencyConverter)
+* **Repository Link**: [**calculator-tkinter**](https://github.com/bharathkukka/InfosysTraining-WD/tree/main/Calculator-CurrencyConverter)
 * **Screenshot**:
     ![Calculator Screenshot](https://github.com/bharathkukka/InfosysTraining-WD/blob/3baefc92cb5715aa79e98a1011eedb6f51bfb85a/Calculator-CurrencyConverter/Data/BC.png)
 
