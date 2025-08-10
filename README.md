@@ -1,4 +1,4 @@
-# Infosys Web Development Training Portfolio 🚀
+# Infosys Web Development Training  🚀
 
 Welcome to my portfolio! This repository summarizes the projects I built and the skills I acquired during the Infosys Web Development training program.
 
